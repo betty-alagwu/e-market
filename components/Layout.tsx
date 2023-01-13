@@ -18,7 +18,6 @@ const Layout = ({ children }: LayoutProps) => {
       </header>
       <main className="main-container">
         {children}
-        <main />
       </main>
       <footer>
         <Footer />

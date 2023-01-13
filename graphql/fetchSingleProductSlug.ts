@@ -3,18 +3,9 @@ import { gql } from 'graphql-request'
 import { client } from './client'
 
 const getSingleProductQuery = gql`
- query FetchSingleProduct ($slug: String!) {
-  product(where: { slug:  $slug}) {
-    id
+ query FetchSingleProduct () {
+  product {
     slug
-    name
-    price
-    images {
-     id
-      url
-    }
-    updatedAt
-    details
   }
 }
 `

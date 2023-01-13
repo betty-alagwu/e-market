@@ -1,5 +1,5 @@
 import React from "react";
-import Rd from "react-dom/server";
+import Rd from 'react-dom/server'
 import {
   FooterBanner,
   HeroBanner,
@@ -16,6 +16,7 @@ export interface HomeProps {
   products: Product[];
   banner: Banner;
 }
+
 
 const Home = ({ products, banner }: HomeProps) => {
   return (

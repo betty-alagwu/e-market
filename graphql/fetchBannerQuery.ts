@@ -28,5 +28,5 @@ const bannerQuery = gql`
 `
 
 export async function fetchBanner() { 
-    return client.request<{banners: Banner[]}>(bannerQuery)
+  return client.request<{banners: Banner[]}>(bannerQuery)
 }
