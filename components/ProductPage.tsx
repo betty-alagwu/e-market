@@ -1,11 +1,13 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react";
+import Link from "next/link";
+import { Product } from "@/types/products";
 
-export interface ProductProps { 
-  image : { url: string }
-  name: string
-  slug: string
-  price: number
+interface ProductProps {
+  image: { url: string };
+  name: string;
+  slug: string;
+  price: number;
+  // product: Product;
 }
 
 const ProductPage = ({ image, name, slug, price }: ProductProps) => {

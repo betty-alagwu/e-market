@@ -4,7 +4,6 @@ interface Image {
 }
 
 export interface Product {
-  map: any;
   id: string;
   name: string;
   slug: string;
