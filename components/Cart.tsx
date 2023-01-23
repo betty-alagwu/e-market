@@ -15,8 +15,7 @@ const Cart = () => {
   const cartRef = useRef<HTMLDivElement>(null);
   const { cartItems, setShowCart, setCartItems } = useStateContext();
 
-  const  handleCheckout = async () => {
-    
+  const handleCheckout = async () => {
     const stripe = await getStripe();
 
     const response = await fetch("/api/checkoutSession", {
@@ -29,14 +28,12 @@ const Cart = () => {
     console.log(response);
     if (response.status === 500) {
       return;
-    };
+    }
     const data = await response.json();
     toast.loading("Redirecting to checkout...");
 
     stripe?.redirectToCheckout({ sessionId: data.id });
-  }
-
-
+  };
 
   const cartTotal = cartItems.reduce(function (total, cartItem) {
     return total + cartItem.quantity * cartItem.price;
