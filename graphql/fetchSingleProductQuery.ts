@@ -9,6 +9,7 @@ const getSingleProductQuery = gql`
     slug
     name
     price
+    totalAvailable
     images {
      id
       url

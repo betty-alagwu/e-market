@@ -30,6 +30,7 @@ export interface CartItem {
   quantity: number;
   price: number;
   image: string;
+  totalAvailable: number;
 }
 
 export const StateContext = ({ children }: PropsWithChildren) => {

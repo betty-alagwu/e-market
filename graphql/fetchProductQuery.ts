@@ -14,6 +14,7 @@ const getProductsQuery = gql`
     price
     details
     updatedAt
+    totalAvailable
     updatedBy {
       id
       name

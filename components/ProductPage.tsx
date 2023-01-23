@@ -7,7 +7,6 @@ interface ProductProps {
   name: string;
   slug: string;
   price: number;
-  // product: Product;
 }
 
 const ProductPage = ({ image, name, slug, price }: ProductProps) => {
@@ -23,7 +22,7 @@ const ProductPage = ({ image, name, slug, price }: ProductProps) => {
             className="product-image"
           />
           <p className="product-name">{name}</p>
-          <p className="product-price">{price}</p>
+          <p className="product-price">${price}</p>
         </div>
       </Link>
     </div>

@@ -28,8 +28,8 @@ const HeroBanner = ({
         <h1>{largeText}</h1>
         <img src={image} alt="headphones" className="hero-banner-image" />
       </div>
-      <div className="">
-        <Link href={`/product/${product}`}>
+      <div>
+        <Link href="/">
           <button type="button">{buttonText}</button>
         </Link>
         <div className="desc">

@@ -10,4 +10,5 @@ export interface Product {
   images: Image[];
   price: number;
   details: string;
+  totalAvailable: number;
 }

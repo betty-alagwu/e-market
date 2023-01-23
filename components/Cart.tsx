@@ -8,24 +8,39 @@ import {
 } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
 import toast from "react-hot-toast";
-import { CartItem, useStateContext } from "@/Context/StateContext";
+import { useStateContext } from "@/Context/StateContext";
+import getStripe from "@/graphql/getStripe";
 
 const Cart = () => {
   const cartRef = useRef<HTMLDivElement>(null);
   const { cartItems, setShowCart, setCartItems } = useStateContext();
 
+  const  handleCheckout = async () => {
+    
+    const stripe = await getStripe();
+
+    const response = await fetch("/api/checkoutSession", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ items: cartItems }),
+    });
+    console.log(response);
+    if (response.status === 500) {
+      return;
+    };
+    const data = await response.json();
+    toast.loading("Redirecting to checkout...");
+
+    stripe?.redirectToCheckout({ sessionId: data.id });
+  }
+
+
+
   const cartTotal = cartItems.reduce(function (total, cartItem) {
     return total + cartItem.quantity * cartItem.price;
   }, 0);
-
-  const updateCart = (item: CartItem, quantity: number) => {
-    const foundItem = cartItems.find((cartItem) => cartItem.name === item.name);
-
-    if(foundItem){
-      setCartItems([...cartItems, { ...foundItem, quantity: quantity + 1 }])
-    }
-    setCartItems([...cartItems, { ...item, quantity: quantity - 1 }]);
-  }
 
   return (
     <div className="cart-wrapper" ref={cartRef}>
@@ -68,20 +83,50 @@ const Cart = () => {
                     <h5>{item.name}</h5>
                     <h4>${item.price * item.quantity} </h4>
                   </div>
+                  <span className="flex top">
+                    ({item.totalAvailable} Items available)
+                  </span>
                   <div className="flex bottom">
                     <div>
                       <p className="quantity-desc">
                         <button
                           className="minus"
-                          //   disabled={qty === 1}
-                          //   onClick={function () {
-                          //     setQty(qty - 1);
-                          //   }}
+                          onClick={function () {
+                            setCartItems((prev) => {
+                              const newCartItems = [...prev];
+                              const index = newCartItems.findIndex(
+                                (cartItem) => cartItem.name === item.name
+                              );
+                              if (index >= 0) {
+                                if (newCartItems[index].quantity === 1) {
+                                  newCartItems.splice(index, 1);
+                                } else {
+                                  newCartItems[index].quantity -= 1;
+                                }
+                              }
+                              return newCartItems;
+                            });
+                          }}
                         >
                           <AiOutlineMinus />
                         </button>
-                        <span className="num">0</span>
-                        <button className="plus" onClick={() => updateCart()}>
+                        <span className="num">{item.quantity}</span>
+                        <button
+                          className="plus"
+                          disabled={item.quantity === item.totalAvailable}
+                          onClick={function () {
+                            setCartItems((prev) => {
+                              const newCartItems = [...prev];
+                              const index = newCartItems.findIndex(
+                                (cartItem) => cartItem.name === item.name
+                              );
+                              if (index >= 0) {
+                                newCartItems[index].quantity += 1;
+                              }
+                              return newCartItems;
+                            });
+                          }}
+                        >
                           <AiOutlinePlus />
                         </button>
                       </p>
@@ -89,7 +134,18 @@ const Cart = () => {
                     <button
                       type="button"
                       className="remove-item"
-                      onClick={() => setShowCart(false)}
+                      onClick={function () {
+                        setCartItems((prev) => {
+                          const newCartItems = [...prev];
+                          const index = newCartItems.findIndex(
+                            (cartItem) => cartItem.name === item.name
+                          );
+                          if (index >= 0) {
+                            newCartItems.splice(index, 1);
+                          }
+                          return newCartItems;
+                        });
+                      }}
                     >
                       <TiDeleteOutline />
                     </button>
@@ -105,7 +161,7 @@ const Cart = () => {
               <h3>${cartTotal}</h3>
             </div>
             <div className="btn-container">
-              <button className="btn" type="button">
+              <button className="btn" type="button" onClick={handleCheckout}>
                 Pay with Stripe
               </button>
             </div>
