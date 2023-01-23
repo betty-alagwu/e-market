@@ -9,7 +9,7 @@ export const runFireworks = () => {
       return Math.random() * (max - min) + min;
     }
 
-    var interval = setInterval(function () {
+    var interval: string | number | NodeJS.Timeout | undefined = setInterval(function () {
       var timeLeft = animationEnd - Date.now();
 
       if (timeLeft <= 0) {
