@@ -83,7 +83,7 @@ const ProductDetails = ({ product, products }: ProductDetailsProps) => {
             <h3>Quantity:</h3>
             <p className="quantity-desc">
               <button
-                className="minus"
+                className="minus "
                 disabled={qty === 1}
                 onClick={function () {
                   setQty(qty - 1);

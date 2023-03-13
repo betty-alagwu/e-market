@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+<h1>E-market</h1>
+<h6><i>Eccommerce website</i></h6>
+<hr />
+</div>
 
-## Getting Started
+This project is an eCommerce website that allows users to browse and purchase products online. The website is designed to provide a user-friendly and intuitive interface that facilitates easy navigation and efficient shopping experience.
 
-First, run the development server:
+<br/>
+<br/>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Feature List
+- Product Catalog: The website displays a list of products that customers can purchase. Each product has a name, description, image, and price.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Shopping Cart: Customers can add items to their shopping cart and adjust quantities before proceeding to checkout.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Stripe checkout: When customers are ready to checkout, they are redirected to a secure Stripe checkout page to enter their payment information.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- Order Confirmation: After completing the checkout process, customers receive an order confirmation with details of their purchase.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## General Setup
 
-## Learn More
+1. Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+   On all platforms:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   - Install Node version 16.4.0
+   - Install [yarn](https://classic.yarnpkg.com/lang/en/docs/install)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. Clone the repo
 
-## Deploy on Vercel
+   ```
+   git clone <your fork>
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Run the development server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```
+   yarn dev
+
+
+## Architechture
+This project uses various services:
+
+1. Contentful for data storage
+2. Stripe for payment checkout

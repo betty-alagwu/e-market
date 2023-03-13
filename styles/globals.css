@@ -536,6 +536,7 @@ padding: 6px;
   border-right: 1px solid gray;
   color: #f02d34;
   background: none;
+  border: none;
 }
 .quantity-desc .num{
   border-right: 1px solid gray;
